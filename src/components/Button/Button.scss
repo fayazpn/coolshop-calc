@@ -1,0 +1,59 @@
+@import "../../global.scss";
+
+.button-style {
+  @include themify($themes) {
+    color: themed("primary");
+    padding: 5px 10px;
+    font-weight: 500;
+    background-color: themed("primaryBg");
+    border: 1.5px solid #75bfe9;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      filter: contrast(1.3);
+    }
+    &:focus-visible {
+      outline-color: rgb(108 108 108);
+    }
+    &:active {
+      transform: translateY(2px);
+    }
+    &:disabled {
+      filter: opacity(0.3);
+      cursor: not-allowed;
+      &:active {
+        transform: translateY(0px);
+      }
+    }
+  }
+}
+.green-btn {
+  @include themify($themes) {
+    background-color: themed("successBg");
+    color: themed("success");
+    border-color: #41c514;
+  }
+}
+
+.orange-btn {
+  @include themify($themes) {
+    background-color: themed("warningBg");
+    color: themed("warning");
+    border-color: rgba(250, 207, 37, 68%);
+  }
+}
+
+.red-btn {
+  @include themify($themes) {
+    background-color: themed("dangerBg");
+    color: themed("danger");
+    border-color: #e84855;
+  }
+}
+
+// #75AFE9
+// #ADFC92
+// #E84855

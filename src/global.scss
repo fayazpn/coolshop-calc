@@ -1,0 +1,117 @@
+/* Import new fonts from google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Alkatra&family=Poppins:wght@400;500;600&display=swap");
+
+// Import all the css reset
+@import "reset";
+// Theme variables
+$themes: (
+  light: (
+    textColor: #000,
+    bg: rgba(255, 255, 255, 0.64),
+    bgSoft: rgba(255, 255, 255, 0.54),
+    bgSecondary: rgba(255, 255, 255, 0.64),
+    btnText: #fff,
+    primary: #fff,
+    primaryBg: rgba(107, 153, 199, 1),
+    success: #fff,
+    successBg: rgb(56 200 106),
+    warning: #fff,
+    warningBg: rgb(247, 219, 106, 1),
+    danger: #fff,
+    dangerBg: rgba(232, 72, 85, 1),
+    brandPrimary: #DD5E89,
+    brandBg: linear-gradient(to right, #F7BB97, #da4174)
+  ),
+  dark: (
+    textColor: #fff,
+    bg: rgba(255, 255, 255, 0.24),
+    bgSoft: rgba(0, 0, 0, 0.14),
+    bgSecondary: rgba(0, 0, 0, 0.29),
+    primary: #97d9ff,
+    primaryBg: rgba(107, 153, 199, 0.2),
+    success: #79f74e,
+    successBg: rgba(121, 247, 78, 0.2),
+    warning: #fed049,
+    warningBg: rgb(247, 219, 106, 0.2),
+    danger: #e84855,
+    dangerBg: rgba(232, 72, 85, 0.2),
+    brandPrimary: #0f0c29,
+    brandBg: linear-gradient(to right, #161622, #4e044b, #13121f)
+  ),
+);
+
+$theme-map: null;
+// Mixin for theme
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+// Mixin for responsiveness
+@mixin mobile {
+  @media (max-width: 600px) {
+    @content;
+  }
+}
+
+/* Common Styles */
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.main-wrapper {
+  @include themify($themes) {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 25px;
+    background: themed("brandPrimary");  /* fallback for old browsers */
+    background: themed("brandBg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    color: themed("textColor");
+    .main-container {
+      max-width: 1200px;
+      margin-top: 100px;
+  
+      .brand-title {
+        text-align: center;
+        font-size: 42px;
+        @include mobile {
+          font-size: 30px;
+        }
+      }
+  
+      .brand-desc {
+        font-family: "Alkatra", sans-serif;
+        text-align: center;
+        margin: 15px 0;
+      }
+  
+      @include mobile {
+        margin-top: 20px;
+      }
+    }
+  }
+}
