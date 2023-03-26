@@ -5,8 +5,8 @@
 ## Live Demo
 [Click Here for Live Demo](https://coolshop-calc.vercel.app/)
 
-![App Page](https://github.com/Fayaz-B/coolshop-calc/blob/main/public/demo.png?raw=true)
-
+![App Page](https://github.com/fayazpn/coolshop-calc/blob/main/public/demo.PNG?raw=true)
+fayazpn/coolshop-calc/blob/main/public/demo.PNG
 ## Table of contents
 * [Live Demo](https://coolshop-calc.vercel.app/)
 * [General info](#general-info)
