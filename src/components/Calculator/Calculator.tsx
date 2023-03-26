@@ -36,7 +36,7 @@ const Calculator = () => {
   }, [rows.length]);
 
   // Hook to change the theme
-  const {darkMode,setDarkMode} = useTheme()
+  const { darkMode, setDarkMode } = useTheme();
 
   // Handler to add new row
   const handleAddRow = () => {
@@ -66,12 +66,20 @@ const Calculator = () => {
     dispatch({ type: "SET_SIGN", index, sign });
   };
 
-  // Handler to get the total
-  const getTotal  = rows.reduce((acc, row) => {
-    if (row.disabled) return acc;
-    return row.sign === "+" ?  acc + row.value : acc - row.value;
-  }, 0);
+  // Handler to add row when pressing 'Enter'
 
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log('reached')
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    dispatch({ type: "ADD_ROW" });
+  };
+
+  // Handler to get the total
+  const getTotal = rows.reduce((acc, row) => {
+    if (row.disabled) return acc;
+    return row.sign === "+" ? acc + row.value : acc - row.value;
+  }, 0);
 
   return (
     <div className="calc-container">
@@ -81,7 +89,14 @@ const Calculator = () => {
           Add Row
         </Button>
         <label className="label toggle">
-          <input type="checkbox" checked={darkMode} onChange={(e) => setDarkMode(!darkMode)} className="toggle_input" />
+          <input
+            aria-label="Theme toggle"
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+            className="toggle_input"
+            
+          />
           <div className="toggle-control"></div>
         </label>
       </div>
@@ -111,6 +126,7 @@ const Calculator = () => {
                 onChange={(e) => handleInput(index, e.target.value)}
                 disabled={row.disabled}
                 ref={index === rows.length - 1 ? inputRef : null}
+                onKeyDown={(e) => handleEnterKey(e)}
               />
               <div className="action-buttons">
                 <Button
@@ -157,8 +173,7 @@ const Calculator = () => {
       <div
         className="total-container"
         style={{
-          borderColor:
-            getTotal < 0 ? "#E84855" : getTotal > 0 ? "#79f74e" : "",
+          borderColor: getTotal < 0 ? "#E84855" : getTotal > 0 ? "#79f74e" : "",
         }}
       >
         Total : {getTotal.toLocaleString()}
