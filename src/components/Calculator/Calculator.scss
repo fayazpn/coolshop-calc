@@ -105,7 +105,7 @@ $height: calc($width / 2);
         gap: 10px;
         .input-container {
           background: themed("bgSoft");
-          border: 1px solid rgba(0, 0, 0, 0.51);
+          // border: 1px solid rgba(0, 0, 0, 0.51);
           display: flex;
           flex: 1;
           justify-content: center;

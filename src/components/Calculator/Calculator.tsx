@@ -14,7 +14,7 @@ import calcReducer, { initialState } from "../../shared/AppReducer";
 import { useTheme } from "../../shared/ThemeContext";
 
 const Calculator = () => {
-  // Get row data from LS or assign Initial State if empty
+  // Get row data from localStorage or assign Initial State if empty
   const [rows, dispatch] = useReducer(
     calcReducer,
     (localStorage.getItem("rowsData") &&
@@ -67,7 +67,6 @@ const Calculator = () => {
   };
 
   // Handler to add row when pressing 'Enter'
-
   const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     console.log('reached')
     if (e.key !== "Enter") return;

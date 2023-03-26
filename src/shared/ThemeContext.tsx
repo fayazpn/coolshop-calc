@@ -1,10 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ThemeProviderProps } from "./AppInterface";
-
-interface ThemeContextType {
-  darkMode: boolean;
-  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { ThemeContextType, ThemeProviderProps } from "./AppInterface";
 
 const ThemeContext = createContext<ThemeContextType>({
   darkMode: true,
